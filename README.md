@@ -1,168 +1,205 @@
-FlowPilot
+# ⚡ FlowPilot
 
-AI-Powered Business Process Automation Consultant
+**AI Business Process Automation Consultant**
 
-FlowPilot is an AI-powered tool that analyzes manual business processes and identifies opportunities for automation.
+FlowPilot is a lightweight AI-assisted tool that analyzes manual business processes, identifies automation opportunities, recommends AI agents, and estimates automation potential.
 
-It helps businesses understand:
+It is built as a practical portfolio project around **Python, Streamlit, Ollama, process analysis, automation logic, and workflow design**.
 
-Which tasks are repetitive and manual
-Which parts of a process can be automated
-Where AI agents can be introduced
-Which steps still require human involvement
-How suitable a process is for automation
-What an automated workflow could look like
-Problem
+## 🎯 Why I Built FlowPilot
 
-Many businesses still rely heavily on manual work across email, spreadsheets, documents, HR systems, CRM platforms, and internal tools.
+Many business processes contain repetitive work such as:
 
-This creates:
+- checking documents
+- entering and updating records
+- sending emails
+- requesting approvals
+- creating accounts
+- following up on missing information
+- moving information between systems
 
-Repetitive work
-Processing delays
-Human errors
-Operational bottlenecks
-Poor visibility into automation opportunities
+FlowPilot explores how these processes can be divided between:
 
-Businesses often know that automation could help, but they don't know where to start.
+**Human work → AI-assisted work → deterministic automation**
 
-Solution
+The goal is not to automate every decision. High-risk decisions, approvals, exceptions, and sensitive actions should remain subject to human review.
 
-FlowPilot acts as an automation consultant.
+## 🚀 What FlowPilot Does
 
-A user describes a business process in natural language, and FlowPilot analyzes it to produce:
+A user describes a manual business process.
 
-Process summary
-Task identification
-Task classification
-Automation opportunities
-Automation score
-AI agent recommendations
-Human-in-the-loop recommendations
-Suggested automation workflow
-How It Works
-Business Process
-       ↓
+FlowPilot then:
+
+1. Analyzes the process with an LLM.
+2. Summarizes the process.
+3. Identifies repetitive tasks.
+4. Identifies bottlenecks and risks.
+5. Suggests automation opportunities.
+6. Recommends relevant AI agents.
+7. Generates a proposed automation workflow.
+8. Calculates a deterministic automation-potential score.
+9. Explains the signals behind the score.
+10. Provides a high-level automation recommendation.
+
+## 🧩 Example: HR Employee Onboarding
+
+### Input
+
+> HR receives a new employee's information, checks the documents, creates an employee record, requests IT account creation, sends onboarding instructions, and follows up on missing documents.
+
+### FlowPilot identifies opportunities such as
+
+- document verification
+- employee record creation
+- IT account requests
+- onboarding communication
+- missing-document follow-up
+
+It can then propose a workflow containing automation and human-review points.
+
+## 🏗️ Current Architecture
+
+```text
+User
+  ↓
+Streamlit UI
+  ↓
+Process Description
+  ↓
+Ollama / Local LLM
+  ↓
 AI Process Analysis
-       ↓
-Task Extraction
-       ↓
-Task Classification
-       ↓
-Automation Scoring
-       ↓
-AI Agent Recommendations
-       ↓
-Human-in-the-Loop Analysis
-       ↓
-Automation Workflow
-Example
+  ↓
+Deterministic Scoring Engine
+  ↓
+Automation Potential
+  ↓
+Human-in-the-Loop Recommendation
+```
 
-A business may describe a process such as:
+### Current stack
 
-HR receives documents from a new employee, enters information into the HR system, sends onboarding forms, and notifies IT to create accounts.
+- **Python**
+- **Streamlit**
+- **Ollama**
+- **Qwen 2.5 0.5B**
+- **Git / GitHub**
 
-FlowPilot analyzes the process and identifies:
+## 📊 Scoring Approach
 
-Data entry tasks
-Document handling
-Communication tasks
-System updates
-Automation opportunities
-Potential AI agents
-Human approval points
-Current Technology
-Python
-Streamlit
-Ollama
-Qwen 2.5
-Git
-GitHub
-Current Status
+The automation score is calculated separately from the LLM output so that the same process produces a consistent score.
 
-MVP — Early Development
+The scoring engine considers signals related to:
 
-The current version focuses on:
+- Manual Work
+- Repetition
+- Rule-Based Decisions
+- Error Reduction
+- System Integration
+- AI Suitability
 
-AI-powered process analysis
-Task extraction
-Task classification
-Deterministic automation scoring
-AI agent recommendations
-Workflow recommendations
-Human-in-the-loop identification
-Product Vision
+The score is intended as an assessment signal rather than a financial or operational guarantee.
 
-FlowPilot aims to become a business automation discovery platform that helps companies move from:
+## 👤 Human-in-the-Loop
 
-Manual Process → Automation Opportunity → AI Agent Design → Automated Workflow
+FlowPilot does not assume that every business task should be fully automated.
 
-The long-term goal is to help businesses discover and prioritize processes that can benefit from AI and workflow automation.
+A realistic automation system may combine:
 
-Roadmap
-Phase 1 — MVP
+```text
+AI Agent
+    ↓
+Validation
+    ↓
+Human Approval
+    ↓
+Automation
+    ↓
+Notification
+```
 
-Process analysis
+This is especially important for sensitive HR, financial, compliance, and operational decisions.
 
-Task extraction
+## 🛠️ Running Locally
 
-Task classification
+### Requirements
 
-Automation scoring
+- Python 3.x
+- Ollama
+- A local Ollama model
+- Streamlit
 
-AI agent recommendations
+### Install dependencies
 
-Workflow recommendations
+```bash
+pip install streamlit ollama
+```
 
-Phase 2 — Product
+### Pull the model
 
-Interactive workflow visualization
+```bash
+ollama pull qwen2.5:0.5b
+```
 
-Improved scoring engine
+### Run FlowPilot
 
-Process comparison
+```bash
+streamlit run flowpilot_app.py
+```
 
-Exportable automation reports
+## 📁 Project Structure
 
-Better AI analysis
-
-Industry-specific templates
-
-Phase 3 — Automation Platform
-
-Workflow execution
-
-AI agent orchestration
-
-Business system integrations
-
-Monitoring and analytics
-
-Human approval workflows
-
-Project Structure
+```text
 FlowPilot/
-│
 ├── flowpilot_app.py
 ├── README.md
-└── .gitignore
-Development
+├── .gitignore
+└── docs/
+    ├── 01_Product_Overview.md
+    ├── 02_Product_Requirements.md
+    ├── 03_System_Architecture.md
+    └── 04_User_Flow.md
+```
 
-Clone the repository:
+## 🔭 Future Direction
 
-git clone <repository-url>
+The current version intentionally focuses on the core analysis experience.
 
-Create and activate a Python virtual environment:
+Potential future improvements include:
 
-python -m venv venv
+- task-level Human / AI / Automation classification
+- ranked automation opportunities
+- impact vs. effort analysis
+- interactive workflow visualization
+- ROI estimation
+- API and webhook integrations
+- connectors to business systems
+- executable workflows
+- stronger evaluation and testing
+- modular backend architecture
 
-Install the required dependencies:
+These are future directions, not claims about functionality already implemented.
 
-pip install streamlit ollama
+## 💡 Portfolio Context
 
-Run FlowPilot:
+FlowPilot is a practical project demonstrating an interest in:
 
-streamlit run flowpilot_app.py
-Disclaimer
+- AI automation
+- business process analysis
+- workflow design
+- AI agents
+- human-in-the-loop systems
+- Python development
+- product thinking
 
-FlowPilot is currently an experimental MVP under active development.
+The project is intentionally being developed incrementally: first understanding the business problem, then improving the analysis, and eventually connecting recommendations to real automation systems.
+
+## 📌 Project Status
+
+**Current stage:** Working MVP / Portfolio Project
+
+The priority at this stage is learning, demonstrating practical ability, and validating the approach through real-world problems.
+
+## 👨‍💻 Author
+
+Built by **Ali** as an independent AI automation project.
